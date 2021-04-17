@@ -2,7 +2,6 @@ package ru.myhome.test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,5 +31,8 @@ public class TestWorktimeList {
 	
 	public Map<LocalDate,Worktime> getTimeList(){
 		return wtList;
+	}
+	public void addWorktime(Worktime wt) {
+		wtList.put(wt.getDate(), wt);
 	}
 }

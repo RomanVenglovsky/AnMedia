@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import ru.myhome.bridge.BridgeInterface;
-import ru.myhome.dao.test.TestBridge;
+import ru.myhome.test.TestBridge;
 
 @Configuration
 public class InterfaceBuilder {

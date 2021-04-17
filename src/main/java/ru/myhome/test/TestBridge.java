@@ -1,4 +1,4 @@
-package ru.myhome.dao.test;
+package ru.myhome.test;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -6,8 +6,6 @@ import java.util.Map;
 import ru.myhome.bridge.BridgeInterface;
 import ru.myhome.model.intefaces.Person;
 import ru.myhome.model.intefaces.Worktime;
-import ru.myhome.test.TestUser;
-import ru.myhome.test.TestWorktimeList;
 
 public class TestBridge implements BridgeInterface{
 
@@ -37,6 +35,12 @@ public class TestBridge implements BridgeInterface{
 	public Map<LocalDate, Worktime> getWorktimeList(Person person) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addWorktime(Worktime worktime) {
+		// TODO Auto-generated method stub
+		wtList.addWorktime(worktime);
 	}
 
 }

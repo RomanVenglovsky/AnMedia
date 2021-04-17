@@ -9,17 +9,23 @@ import ru.myhome.model.intefaces.Worktime;
 public class WorktimeTest implements Worktime{
 	
 	private LocalDate date;
-	private LocalTime a;
-	private LocalTime b;
+	private LocalTime startTime;
+	private LocalTime endTime;
 	
+	
+	public LocalTime getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
+	}
 	public WorktimeTest() {
-		
 	}
 	public WorktimeTest(LocalDate date, LocalTime a, LocalTime b) {
 		super();
 		this.date = date;
-		this.a = a;
-		this.b = b;
+		this.startTime = a;
+		this.endTime = b;
 		//System.out.println()
 	}
 	public LocalDate getDate() {
@@ -28,21 +34,18 @@ public class WorktimeTest implements Worktime{
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public LocalTime getA() {
-		return a;
+	@Override
+	public LocalTime getStartTime() {
+		return startTime;
 	}
-	public void setA(LocalTime a) {
-		this.a = a;
+	@Override
+	public void setStartTime(LocalTime a) {
+		this.startTime = a;
 	}
-	public LocalTime getB() {
-		return b;
-	}
-	public void setB(LocalTime b) {
-		this.b = b;
-	}
+	
 	@Override
 	public String toString() {
 		DateTimeFormatter fDate = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-		return String.format("%s %tR - %tR", getDate().format(fDate), getA(), getB());
+		return String.format("%s %tR - %tR", getDate().format(fDate), getStartTime(), getEndTime());
 	}
 }

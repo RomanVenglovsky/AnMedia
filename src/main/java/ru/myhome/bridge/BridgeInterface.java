@@ -11,4 +11,5 @@ public interface BridgeInterface {
 	boolean validateUser(String login, String password);
 	Map<LocalDate,Worktime> getWorktimeList();
 	Map<LocalDate,Worktime> getWorktimeList(Person person);
+	void addWorktime(Worktime worktime);
 }
