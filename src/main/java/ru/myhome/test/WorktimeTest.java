@@ -1,9 +1,12 @@
 package ru.myhome.test;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import ru.myhome.model.intefaces.Workday;
 import ru.myhome.model.intefaces.Worktime;
 
 public class WorktimeTest implements Worktime{
@@ -13,11 +16,12 @@ public class WorktimeTest implements Worktime{
 	private LocalTime endTime;
 	
 	
-	public LocalTime getEndTime() {
-		return endTime;
+	public Time getEndtime() {
+		return Time.valueOf(endTime);
 	}
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
+	@Override
+	public void setEndtime(Time endTime) {
+		this.endTime = endTime.toLocalTime();
 	}
 	public WorktimeTest() {
 	}
@@ -28,24 +32,37 @@ public class WorktimeTest implements Worktime{
 		this.endTime = b;
 		//System.out.println()
 	}
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+	@Override
+	public Date getDate() {
+		return Date.valueOf(date);
 	}
 	@Override
-	public LocalTime getStartTime() {
-		return startTime;
+	public void setDate(Date date) {
+		this.date = date.toLocalDate();
 	}
 	@Override
-	public void setStartTime(LocalTime a) {
-		this.startTime = a;
+	public Time getStarttime() {
+		return Time.valueOf(startTime);
+	}
+	@Override
+	public void setStarttime(Time a) {
+		this.startTime = a.toLocalTime();
 	}
 	
 	@Override
 	public String toString() {
 		DateTimeFormatter fDate = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-		return String.format("%s %tR - %tR", getDate().format(fDate), getStartTime(), getEndTime());
+		String d = getDate().toLocalDate().format(fDate);
+		return String.format("%s %tR - %tR", d, getStarttime(), getEndtime());
+	}
+	@Override
+	public Workday getWorkday() {
+		return null;
+	}
+	@Override
+	public void setWorkday(Workday workday) {
+	}
+	@Override
+	public void print() {
 	}
 }

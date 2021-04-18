@@ -1,14 +1,17 @@
 package ru.myhome.model.intefaces;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Date;
+import java.sql.Time;
 
 public interface Worktime {
 
-	public LocalDate getDate();
-	public LocalTime getStartTime();
-	public LocalTime getEndTime();
-	public void setDate(LocalDate date);
-	public void setStartTime(LocalTime a);
-	public void setEndTime(LocalTime b);
+	public Date getDate();
+	public Time getStarttime();
+	public Time getEndtime();
+	public void setDate(Date date);
+	public void setStarttime(Time a);
+	public void setEndtime(Time b);
+	public Workday getWorkday();
+	public void setWorkday(Workday workday);
+	public void print();
 }

@@ -23,7 +23,7 @@ public class TestWorktimeList {
 		LocalDate date = LocalDate.now();
 		for(int i = 1; i<5; i++) {
 			Worktime wt = new WorktimeTest(date.minusDays(6-i), a.plusHours(i), b.plusHours(i));
-			wtList.put(wt.getDate(), wt);
+			wtList.put(wt.getDate().toLocalDate(), wt);
 			System.out.println(wt);
 			
 		}
@@ -33,6 +33,6 @@ public class TestWorktimeList {
 		return wtList;
 	}
 	public void addWorktime(Worktime wt) {
-		wtList.put(wt.getDate(), wt);
+		wtList.put(wt.getDate().toLocalDate(), wt);
 	}
 }

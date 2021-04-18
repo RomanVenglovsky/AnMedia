@@ -1,8 +1,10 @@
 package ru.myhome.GUI;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,9 @@ public class addTimeSceneController implements Controller, InitializingBean{
 	private ObservableList<Worktime> items;
 	
 	@FXML private TableView<Worktime> tblDateTime;
-	@FXML private TableColumn<Worktime, LocalDate> dateColumn;
-	@FXML private TableColumn<Worktime, LocalTime> timeAColumn;
-	@FXML private TableColumn<Worktime, LocalTime> timeBColumn;
+	@FXML private TableColumn<Worktime, Date> dateColumn;
+	@FXML private TableColumn<Worktime, Time> timeAColumn;
+	@FXML private TableColumn<Worktime, Time> timeBColumn;
 	@FXML private Button btnAdd;
 	@FXML private DatePicker dtpDate;
 	@FXML private TextField txfStartTime;
@@ -53,21 +55,21 @@ public class addTimeSceneController implements Controller, InitializingBean{
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		
-		dateColumn.setCellValueFactory(new PropertyValueFactory<Worktime, LocalDate>("date"));
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-		dateColumn.setCellFactory(tc -> new TableCell<Worktime, LocalDate>() {
+		dateColumn.setCellValueFactory(new PropertyValueFactory<Worktime,Date>("date"));
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");
+		dateColumn.setCellFactory(tc -> new TableCell<Worktime, Date>() {
 		    @Override
-		    protected void updateItem(LocalDate date, boolean empty) {
+		    protected void updateItem(Date date, boolean empty) {
 		        super.updateItem(date, empty);
 		        if (empty) {
 		            setText(null);
 		        } else {
-		            setText(formatter.format(date));
+		            setText(new SimpleDateFormat("dd.MM.YYYY").format(date));
 		        }
 		    }
 		});
-		timeAColumn.setCellValueFactory(new PropertyValueFactory<Worktime, LocalTime>("startTime"));
-		timeBColumn.setCellValueFactory(new PropertyValueFactory<Worktime, LocalTime>("endTime"));
+		timeAColumn.setCellValueFactory(new PropertyValueFactory<Worktime, Time>("starttime"));
+		timeBColumn.setCellValueFactory(new PropertyValueFactory<Worktime, Time>("endtime"));
 		
 		items = FXCollections.observableArrayList(amDao.getWorktimeList().values());
 		tblDateTime.setItems(items);
