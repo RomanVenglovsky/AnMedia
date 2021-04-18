@@ -2,10 +2,15 @@ package ru.myhome.GUI;
 
 import ru.myhome.Main;
 import ru.myhome.bridge.BridgeInterface;
+import ru.myhome.dao.BuilderDao;
+import ru.myhome.dao.interfaces.PersonDao;
+import ru.myhome.dao.interfaces.WorkdayDao;
+import ru.myhome.dao.interfaces.WorktimeDao;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,8 +62,10 @@ public class mainSceneController implements Controller, InitializingBean{
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("afterPropertiesSet from main scene");
-		txfLogin.setText("admin");
-		psfPassword.setText("root");
-	}
+		
+		AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(BuilderDao.class);
+		PersonDao personDao = context.getBean("jpaPesronService", PersonDao.class);
+		WorkdayDao workdayDao = context.getBean("jpaWorkdayService", WorkdayDao.class);
+		WorktimeDao worktimeDao = context.getBean("jpaWorktimeService", WorktimeDao.class);}
 }
