@@ -32,7 +32,7 @@ public class DbModelWorktime implements Serializable, Worktime {
 		@JoinColumn(name="day", referencedColumnName="date"),
 		@JoinColumn(name="persaonId", referencedColumnName="personId")
 		})
-	private Workday workday;
+	private DbModelWorkday workday;
 	
 	public int getIntervalId() {
 		return this.intervalId;
@@ -63,7 +63,7 @@ public class DbModelWorktime implements Serializable, Worktime {
 	}
 
 	public void setWorkday(Workday workday) {
-		this.workday = workday;
+		this.workday = (DbModelWorkday) workday;
 	}
 	
 	public void print() {

@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories
 @PropertySource("classpath:jdbc.properties")
 @PropertySource("classpath:hibernate.properties")
-@ComponentScan
+@ComponentScan("ru.myhome")
 public class BuilderDao {
 
 	@Autowired
@@ -67,7 +67,7 @@ public class BuilderDao {
 		entityManager.setJpaVendorAdapter(
 				new HibernateJpaVendorAdapter());
 		entityManager.setJpaPropertyMap(prop);
-		entityManager.setPackagesToScan("ru.myhome.dao");
+		entityManager.setPackagesToScan("ru.myhome");
 		return entityManager;
 	}
 	

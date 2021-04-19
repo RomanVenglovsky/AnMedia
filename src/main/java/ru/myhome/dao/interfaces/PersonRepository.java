@@ -5,12 +5,12 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ru.myhome.model.intefaces.Person;
+import ru.myhome.model.DbModelPerson;
 
 
-public interface PersonRepository extends CrudRepository<Person, Integer>{
-	List<Person> findAll();
-	Optional<Person> findByFirstNameAndLastName(String firstName, String lastName);
-	Optional<Person> findByPhone(String number);
+public interface PersonRepository extends CrudRepository<DbModelPerson, Integer>{
+	List<DbModelPerson> findAll();
+	Optional<DbModelPerson> findByFirstNameAndLastName(String firstName, String lastName);
+	Optional<DbModelPerson> findByPhone(String number);
 	boolean existsByFirstNameAndLastName(String firstName, String lastName);
 }

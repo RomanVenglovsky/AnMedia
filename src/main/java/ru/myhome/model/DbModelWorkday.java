@@ -1,7 +1,7 @@
 package ru.myhome.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalTime;
 
 import javax.persistence.*;
@@ -25,7 +25,7 @@ public class DbModelWorkday implements Serializable, Workday {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private WorkdayPK id;
+	private DbModelWorkdayPK id;
 
 	private double k1;
 
@@ -38,7 +38,7 @@ public class DbModelWorkday implements Serializable, Workday {
 	//bi-directional many-to-one association to Person
 	@ManyToOne
 	@JoinColumn(name="personId", insertable=false, updatable=false)
-	private Person person;
+	private DbModelPerson person;
 
 	//bi-directional many-to-one association to Worktime
 	@OneToMany(mappedBy="workday",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -54,12 +54,12 @@ public class DbModelWorkday implements Serializable, Workday {
 		
 	}*/
 	@Override
-	public WorkdayPK getId() {
+	public DbModelWorkdayPK getId() {
 		return this.id;
 	}
 	@Override
 	public void setId(WorkdayPK id) {
-		this.id = id;
+		this.id = (DbModelWorkdayPK) id;
 	}
 	@Override
 	public Date getDate() {
@@ -138,7 +138,7 @@ public class DbModelWorkday implements Serializable, Workday {
 	}
 
 	public void setPerson(Person person) {
-		this.person = person;
+		this.person = (DbModelPerson) person;
 		/*this.person.setFirstName(person.getFirstName());
 		this.person.setLastName(person.getLastName());
 		this.person.setPhone(person.getPhone());

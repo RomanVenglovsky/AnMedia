@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ru.myhome.dao.interfaces.PersonDao;
 import ru.myhome.dao.interfaces.PersonRepository;
-import ru.myhome.model.intefaces.Person;
+import ru.myhome.model.DbModelPerson;
 
 @Service("jpaPesronService")
 @Transactional
@@ -29,17 +29,17 @@ public class JpaPesronService implements PersonDao{
 		return pr;
 	}
 
-	public List<Person> findAll() {
+	public List<DbModelPerson> findAll() {
 		// TODO Auto-generated method stub
 		return pr.findAll();
 	}
 
-	public void addPerson(Person person) {
+	public void addPerson(DbModelPerson person) {
 		pr.save(person);
 	}
 
 	@Override
-	public Person findByName(String firstName, String lastName) {
+	public DbModelPerson findByName(String firstName, String lastName) {
 		return pr.findByFirstNameAndLastName(firstName, lastName).get();
 	}
 
@@ -49,13 +49,13 @@ public class JpaPesronService implements PersonDao{
 	}
 
 	@Override
-	public Person findById(int id) {
+	public DbModelPerson findById(int id) {
 		// TODO Auto-generated method stub
 		return pr.findById(id).get();
 	}
 
 	@Override
-	public Person findByPhoneNumber(String number) {
+	public DbModelPerson findByPhoneNumber(String number) {
 		return pr.findByPhone(number).get();
 	}
 

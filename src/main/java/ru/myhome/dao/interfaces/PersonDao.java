@@ -2,14 +2,14 @@ package ru.myhome.dao.interfaces;
 
 import java.util.List;
 
-import ru.myhome.model.intefaces.Person;
+import ru.myhome.model.DbModelPerson;
 
 public interface PersonDao {
 	
-	List<Person> findAll();
-	Person findByName(String firstName, String lastName);
-	Person findById(int id);
-	Person findByPhoneNumber(String number);
-	void addPerson(Person person);
+	List<DbModelPerson> findAll();
+	DbModelPerson findByName(String firstName, String lastName);
+	DbModelPerson findById(int id);
+	DbModelPerson findByPhoneNumber(String number);
+	void addPerson(DbModelPerson person);
 	boolean exists(String firstName, String lastName);
 }

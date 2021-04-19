@@ -1,7 +1,9 @@
 package ru.myhome.model.intefaces;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.MappedSuperclass;
+@MappedSuperclass
 public interface Workday {
 	
 	public Person getPerson();

@@ -34,7 +34,7 @@ public class DbModelPerson implements Serializable, Person {
 
 	//bi-directional many-to-one association to Workday
 	@OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Workday> workdays;
+	private List<DbModelWorkday> workdays;
 
 	public DbModelPerson() {
 	}
@@ -93,19 +93,19 @@ public class DbModelPerson implements Serializable, Person {
 				getId(), getFirstName(), getLastName(), getPhone());
 	}
 
-	public List<Workday> getWorkdays() {
+	public List<DbModelWorkday> getWorkdays() {
 		return this.workdays;
 	}
 
-	public void setWorkdays(List<Workday> workdays) {
+	public void setWorkdays(List<DbModelWorkday> workdays) {
 		this.workdays = workdays;
 	}
 
-	public Workday addWorkday(Workday workday) {
-		getWorkdays().add(workday);
+	public void addWorkday(Workday workday) {
+		DbModelWorkday wd = (DbModelWorkday)workday;
+		getWorkdays().add(wd);
 		workday.setPerson(this);
 
-		return workday;
 	}
 
 	public Workday removeWorkday(Workday workday) {

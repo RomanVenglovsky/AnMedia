@@ -9,11 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ru.myhome.dao.interfaces.WorkdayDao;
 import ru.myhome.dao.interfaces.WorkdayRepository;
-import ru.myhome.model.intefaces.Workday;
-import ru.myhome.model.intefaces.WorkdayPK;
-
-//import ru.myhome.model.Workday;
-//import ru.myhome.model.WorkdayPK;
+import ru.myhome.model.DbModelWorkday;
+import ru.myhome.model.DbModelWorkdayPK;
 
 
 @Service("jpaWorkdayService")
@@ -25,18 +22,18 @@ public class JpaWorkdayService implements WorkdayDao{
 	private WorkdayRepository wdr;
 	
 	@Override
-	public void addWorkday(Workday workday) {
+	public void addWorkday(DbModelWorkday workday) {
 		wdr.save(workday);
 	}
 
 	@Override
-	public boolean existWorkday(WorkdayPK id) {
+	public boolean existWorkday(DbModelWorkdayPK id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void updateWorkday(Workday workday) {
+	public void updateWorkday(DbModelWorkday workday) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -48,7 +45,7 @@ public class JpaWorkdayService implements WorkdayDao{
 	}
 
 	@Override
-	public Workday getWorkday(WorkdayPK id) {
+	public DbModelWorkday getWorkday(DbModelWorkdayPK id) {
 		return wdr.findById(id).get();
 		
 	}
