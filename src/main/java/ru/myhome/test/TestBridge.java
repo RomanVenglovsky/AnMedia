@@ -2,10 +2,15 @@ package ru.myhome.test;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import ru.myhome.bridge.BridgeInterface;
-import ru.myhome.model.intefaces.Person;
-import ru.myhome.model.intefaces.Worktime;
+import ru.myhome.dao.BuilderDao;
+import ru.myhome.dao.interfaces.PersonDao;
+import ru.myhome.model.Person;
+import ru.myhome.model.Worktime;
 
 public class TestBridge implements BridgeInterface{
 
@@ -20,12 +25,18 @@ public class TestBridge implements BridgeInterface{
 	
 	@Override
 	public boolean validateUser(String login, String password) {
-		System.out.println("Login: " + login + "\nPassword: " + password);
-		TestUser user = new TestUser(login, password);
-		return person.equals(user);
+		/*System.out.println("Login: " + login + "\nPassword: " + password);
+		TestUser user = new TestUser(login, password);*/
+		AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(BuilderDao.class);
+		PersonDao personDao = context.getBean("jpaPesronService", PersonDao.class);
+		Optional<Person> p = personDao.findByPhoneNumber(login);
+		if(p.isPresent()) {
+			if(p.get().getPasword().equals(password)) return true;
+		}
+		return false;
 	}
 
-	@Override
 	public Map<LocalDate, Worktime> getWorktimeList() {
 		// TODO Auto-generated method stub
 		return wtList.getTimeList();
@@ -42,5 +53,4 @@ public class TestBridge implements BridgeInterface{
 		// TODO Auto-generated method stub
 		wtList.addWorktime(worktime);
 	}
-
 }

@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ru.myhome.bridge.BridgeInterface;
-import ru.myhome.model.intefaces.Worktime;
+import ru.myhome.model.Worktime;
 import ru.myhome.test.WorktimeTest;
 
 public class addTimeSceneController implements Controller, InitializingBean{

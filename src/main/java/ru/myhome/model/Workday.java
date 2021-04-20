@@ -6,11 +6,6 @@ import java.time.LocalTime;
 
 import javax.persistence.*;
 
-import ru.myhome.model.intefaces.Person;
-import ru.myhome.model.intefaces.Workday;
-import ru.myhome.model.intefaces.WorkdayPK;
-import ru.myhome.model.intefaces.Worktime;
-
 import java.util.List;
 
 
@@ -21,11 +16,11 @@ import java.util.List;
 @Entity
 @Table(name="workdays")
 @NamedQuery(name="Workday.findAll", query="SELECT w FROM Workday w")
-public class DbModelWorkday implements Serializable, Workday {
+public class Workday implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private DbModelWorkdayPK id;
+	private WorkdayPK id;
 
 	private double k1;
 
@@ -38,30 +33,27 @@ public class DbModelWorkday implements Serializable, Workday {
 	//bi-directional many-to-one association to Person
 	@ManyToOne
 	@JoinColumn(name="personId", insertable=false, updatable=false)
-	private DbModelPerson person;
+	private Person person;
 
 	//bi-directional many-to-one association to Worktime
 	@OneToMany(mappedBy="workday",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Worktime> worktimes;
 
-	public DbModelWorkday() {
+	public Workday() {
 	}
-	public DbModelWorkday(WorkdayPK id) {
+	public Workday(WorkdayPK id) {
 		setId(id);
 	}
 
 	/*public void addWorktime(Worktime wt) {
 		
 	}*/
-	@Override
-	public DbModelWorkdayPK getId() {
+	public WorkdayPK getId() {
 		return this.id;
 	}
-	@Override
 	public void setId(WorkdayPK id) {
-		this.id = (DbModelWorkdayPK) id;
+		this.id = (WorkdayPK) id;
 	}
-	@Override
 	public Date getDate() {
 		return this.id.getDate();
 	}
@@ -138,7 +130,7 @@ public class DbModelWorkday implements Serializable, Workday {
 	}
 
 	public void setPerson(Person person) {
-		this.person = (DbModelPerson) person;
+		this.person = (Person) person;
 		/*this.person.setFirstName(person.getFirstName());
 		this.person.setLastName(person.getLastName());
 		this.person.setPhone(person.getPhone());

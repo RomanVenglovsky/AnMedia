@@ -3,8 +3,8 @@ package ru.myhome.bridge;
 import java.time.LocalDate;
 import java.util.Map;
 
-import ru.myhome.model.intefaces.Person;
-import ru.myhome.model.intefaces.Worktime;
+import ru.myhome.model.Person;
+import ru.myhome.model.Worktime;
 
 public class GuiBridgeDao implements BridgeInterface{
 

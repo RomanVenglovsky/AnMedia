@@ -6,10 +6,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import ru.myhome.model.intefaces.Workday;
-import ru.myhome.model.intefaces.Worktime;
+import ru.myhome.model.Workday;
+import ru.myhome.model.Worktime;
 
-public class WorktimeTest implements Worktime{
+public class WorktimeTest extends Worktime{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private LocalDate date;
 	private LocalTime startTime;

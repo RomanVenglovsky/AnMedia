@@ -2,17 +2,17 @@ package ru.myhome.dao.interfaces;
 
 import java.sql.Date;
 
-import ru.myhome.model.DbModelWorkday;
-import ru.myhome.model.DbModelWorkdayPK;
+import ru.myhome.model.Workday;
+import ru.myhome.model.WorkdayPK;
 
 
 public interface WorkdayDao {
 
-	void addWorkday(DbModelWorkday workday);
-	boolean existWorkday(DbModelWorkdayPK id);
-	void updateWorkday(DbModelWorkday workday);
+	void addWorkday(Workday workday);
+	boolean existWorkday(WorkdayPK id);
+	void updateWorkday(Workday workday);
 	void deleteWorkday(Date date, int personId);
-	DbModelWorkday getWorkday(DbModelWorkdayPK id);
+	Workday getWorkday(WorkdayPK id);
 	//void addTimeToWorkday()
 	
 }

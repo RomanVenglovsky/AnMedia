@@ -1,6 +1,7 @@
 package ru.myhome.dao.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ru.myhome.dao.interfaces.PersonDao;
 import ru.myhome.dao.interfaces.PersonRepository;
-import ru.myhome.model.DbModelPerson;
+import ru.myhome.model.Person;
 
 @Service("jpaPesronService")
 @Transactional
@@ -29,18 +30,18 @@ public class JpaPesronService implements PersonDao{
 		return pr;
 	}
 
-	public List<DbModelPerson> findAll() {
+	public List<Person> findAll() {
 		// TODO Auto-generated method stub
 		return pr.findAll();
 	}
 
-	public void addPerson(DbModelPerson person) {
+	public void addPerson(Person person) {
 		pr.save(person);
 	}
 
 	@Override
-	public DbModelPerson findByName(String firstName, String lastName) {
-		return pr.findByFirstNameAndLastName(firstName, lastName).get();
+	public Optional<Person> findByName(String firstName, String lastName) {
+		return pr.findByFirstNameAndLastName(firstName, lastName);
 	}
 
 	@Override
@@ -49,14 +50,14 @@ public class JpaPesronService implements PersonDao{
 	}
 
 	@Override
-	public DbModelPerson findById(int id) {
+	public Optional<Person> findById(int id) {
 		// TODO Auto-generated method stub
-		return pr.findById(id).get();
+		return pr.findById(id);
 	}
 
 	@Override
-	public DbModelPerson findByPhoneNumber(String number) {
-		return pr.findByPhone(number).get();
+	public Optional<Person> findByPhoneNumber(String number) {
+		return pr.findByPhone(number);
 	}
 
 }

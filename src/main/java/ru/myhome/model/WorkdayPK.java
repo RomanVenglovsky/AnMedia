@@ -5,14 +5,12 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import ru.myhome.model.intefaces.WorkdayPK;
-
 /**
  * The primary key class for the workdays database table.
  * 
  */
 @Embeddable
-public class DbModelWorkdayPK implements Serializable,  WorkdayPK{
+public class WorkdayPK implements Serializable{
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -22,13 +20,12 @@ public class DbModelWorkdayPK implements Serializable,  WorkdayPK{
 	@Column(insertable=false, updatable=false)
 	private int personId;
 
-	public DbModelWorkdayPK() {
+	public WorkdayPK() {
 	}
-	public DbModelWorkdayPK(Date date, int personId) {
+	public WorkdayPK(Date date, int personId) {
 		setPersonId(personId);
 		setDate(date);
 	}
-	@Override
 	public Date getDate() {
 		return this.date;
 	}
@@ -42,7 +39,6 @@ public class DbModelWorkdayPK implements Serializable,  WorkdayPK{
 	public void setPersonId(int personId) {
 		this.personId = personId;
 	}
-
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
@@ -55,7 +51,6 @@ public class DbModelWorkdayPK implements Serializable,  WorkdayPK{
 			this.date.equals(castOther.getDate())
 			&& (this.personId == castOther.getPersonId());
 	}
-	
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;

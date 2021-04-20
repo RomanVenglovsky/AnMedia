@@ -5,10 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import ru.myhome.model.intefaces.Person;
-import ru.myhome.model.intefaces.Workday;
-
-
 /**
  * The persistent class for the persons database table.
  * 
@@ -16,7 +12,7 @@ import ru.myhome.model.intefaces.Workday;
 @Entity
 @Table(name="persons")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
-public class DbModelPerson implements Serializable, Person {
+public class Person implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,9 +30,9 @@ public class DbModelPerson implements Serializable, Person {
 
 	//bi-directional many-to-one association to Workday
 	@OneToMany(mappedBy="person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<DbModelWorkday> workdays;
+	private List<Workday> workdays;
 
-	public DbModelPerson() {
+	public Person() {
 	}
 
 	public int getId() {
@@ -93,21 +89,19 @@ public class DbModelPerson implements Serializable, Person {
 				getId(), getFirstName(), getLastName(), getPhone());
 	}
 
-	public List<DbModelWorkday> getWorkdays() {
+	public List<Workday> getWorkdays() {
 		return this.workdays;
 	}
 
-	public void setWorkdays(List<DbModelWorkday> workdays) {
+	public void setWorkdays(List<Workday> workdays) {
 		this.workdays = workdays;
 	}
 
 	public void addWorkday(Workday workday) {
-		DbModelWorkday wd = (DbModelWorkday)workday;
-		getWorkdays().add(wd);
+		getWorkdays().add(workday);
 		workday.setPerson(this);
 
 	}
-
 	public Workday removeWorkday(Workday workday) {
 		getWorkdays().remove(workday);
 		workday.setPerson(null);

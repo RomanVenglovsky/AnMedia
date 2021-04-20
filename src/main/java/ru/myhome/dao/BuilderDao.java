@@ -22,7 +22,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-@Configuration
+//@Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
 @PropertySource("classpath:jdbc.properties")
@@ -33,6 +33,7 @@ public class BuilderDao {
 	@Autowired
     Environment env;
 	
+	@Lazy
 	@Bean(destroyMethod = "close")
 	public BasicDataSource getDataSource() {
 		BasicDataSource bds = new BasicDataSource();
@@ -41,16 +42,17 @@ public class BuilderDao {
 		bds.setPassword(env.getProperty("jdbc.password"));
 		return bds;
 	}
+	@Lazy
 	@Bean
 	public JdbcTemplate getJdbcTemplate() {
 		return new JdbcTemplate(getDataSource());
 	}
-	
+	@Lazy
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
-	
+	@Lazy
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		Map<String, Object> prop = new HashMap<String, Object>();

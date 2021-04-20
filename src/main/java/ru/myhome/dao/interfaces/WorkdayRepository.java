@@ -2,10 +2,10 @@ package ru.myhome.dao.interfaces;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ru.myhome.model.DbModelWorkday;
-import ru.myhome.model.DbModelWorkdayPK;
+import ru.myhome.model.Workday;
+import ru.myhome.model.WorkdayPK;
 
 
-public interface WorkdayRepository extends CrudRepository<DbModelWorkday, DbModelWorkdayPK>{
+public interface WorkdayRepository extends CrudRepository<Workday, WorkdayPK>{
 
 }

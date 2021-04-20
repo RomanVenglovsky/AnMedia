@@ -3,35 +3,35 @@ package ru.myhome.dao.test;
 import java.util.List;
 
 import ru.myhome.dao.interfaces.WorktimeDao;
-import ru.myhome.model.DbModelWorktime;
+import ru.myhome.model.Worktime;
 
 public class TestWorktimeDao implements WorktimeDao{
 
 	
 	@Override
-	public void addWorktime(DbModelWorktime worktime) {
+	public void addWorktime(Worktime worktime) {
 	}
 
 	@Override
-	public void updateWorktime(DbModelWorktime worktime) {
+	public void updateWorktime(Worktime worktime) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<DbModelWorktime> showAllRecord() {
+	public List<Worktime> showAllRecord() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void deletWorktime(DbModelWorktime worktime) {
+	public void deletWorktime(Worktime worktime) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public DbModelWorktime getWorktime(int id) {
+	public Worktime getWorktime(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,17 +6,13 @@ import java.sql.Time;
 
 import javax.persistence.*;
 
-import ru.myhome.model.intefaces.Workday;
-import ru.myhome.model.intefaces.Worktime;
-
-
 /**
  * The persistent class for the worktime database table.
  * 
  */
 @Entity
 @NamedQuery(name="Worktime.findAll", query="SELECT w FROM Worktime w")
-public class DbModelWorktime implements Serializable, Worktime {
+public class Worktime implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,7 +28,7 @@ public class DbModelWorktime implements Serializable, Worktime {
 		@JoinColumn(name="day", referencedColumnName="date"),
 		@JoinColumn(name="persaonId", referencedColumnName="personId")
 		})
-	private DbModelWorkday workday;
+	private Workday workday;
 	
 	public int getIntervalId() {
 		return this.intervalId;
@@ -41,19 +37,15 @@ public class DbModelWorktime implements Serializable, Worktime {
 	public void setIntervalId(int intervalId) {
 		this.intervalId = intervalId;
 	}
-	@Override
 	public Time getEndtime() {
 		return this.endtime;
 	}
-	@Override
 	public void setEndtime(Time endtime) {
 		this.endtime = endtime;
 	}
-	@Override
 	public Time getStarttime() {
 		return this.starttime;
 	}
-	@Override
 	public void setStarttime(Time starttime) {
 		this.starttime = starttime;
 	}
@@ -61,22 +53,16 @@ public class DbModelWorktime implements Serializable, Worktime {
 	public Workday getWorkday() {
 		return this.workday;
 	}
-
 	public void setWorkday(Workday workday) {
-		this.workday = (DbModelWorkday) workday;
+		this.workday = workday;
 	}
-	
 	public void print() {
 		System.out.println("\t" + getIntervalId() + "  " + getStarttime() + " - " + getEndtime());
 	}
-
-	@Override
 	public Date getDate() {
 		this.workday.getDate();
 		return null;
 	}
-
-	@Override
 	public void setDate(Date date) {
 		// TODO Auto-generated method stub
 		

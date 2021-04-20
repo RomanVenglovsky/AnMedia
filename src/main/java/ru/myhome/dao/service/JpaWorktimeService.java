@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.myhome.dao.interfaces.WorkdayDao;
 import ru.myhome.dao.interfaces.WorktimeDao;
 import ru.myhome.dao.interfaces.WorktimeRepository;
-import ru.myhome.model.DbModelWorktime;
+import ru.myhome.model.Worktime;
 
 @Service("jpaWorktimeService")
 @Transactional
@@ -30,7 +30,7 @@ public class JpaWorktimeService implements WorktimeDao{
 	private WorkdayDao wdDao;
 
 	@Override
-	public void addWorktime(DbModelWorktime worktime) {
+	public void addWorktime(Worktime worktime) {
 		/*Workday wd = worktime.getWorkday();
 		if(wdDao.existWorkday(wd.getId()))
 			wdDao.updateWorkday(wd);
@@ -41,25 +41,25 @@ public class JpaWorktimeService implements WorktimeDao{
 	}
 
 	@Override
-	public void updateWorktime(DbModelWorktime worktime) {
+	public void updateWorktime(Worktime worktime) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deletWorktime(DbModelWorktime worktime) {
+	public void deletWorktime(Worktime worktime) {
 		wtr.delete(worktime);
 		
 	}
 
 	@Override
-	public List<DbModelWorktime> showAllRecord() {
+	public List<Worktime> showAllRecord() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
-	public DbModelWorktime getWorktime(int id) {
+	public Worktime getWorktime(int id) {
 		return wtr.findById(id).get();
 	}
 

@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.myhome.model.intefaces.Worktime;
+import ru.myhome.model.Worktime;
 
 public class TestWorktimeList {
 	
@@ -29,10 +29,10 @@ public class TestWorktimeList {
 		}
 	}
 	
-	public Map<LocalDate,Worktime> getTimeList(){
+	public Map<LocalDate, Worktime> getTimeList(){
 		return wtList;
 	}
 	public void addWorktime(Worktime wt) {
-		wtList.put(wt.getDate().toLocalDate(), wt);
+		wtList.put(wt.getDate().toLocalDate(), (WorktimeTest) wt);
 	}
 }
