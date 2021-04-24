@@ -2,7 +2,13 @@ package ru.myhome.bridge;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Optional;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import ru.myhome.dao.BuilderDao;
+import ru.myhome.dao.interfaces.PersonDao;
+import ru.myhome.dao.interfaces.WorkdayDao;
 import ru.myhome.model.Person;
 import ru.myhome.model.Worktime;
 
@@ -12,9 +18,16 @@ public class GuiBridgeDao implements BridgeInterface{
 	
 	
 	@Override
-	public boolean validateUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public Optional<Person> validateUser(String login, String password) {
+		try(AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(BuilderDao.class)){
+			PersonDao personDao = context.getBean("jpaPesronService", PersonDao.class);
+			Optional<Person> p = personDao.findByPhoneNumber(login);
+			if(p.isPresent()) {
+				if(p.get().getPasword().equals(password)) return p;
+			}
+			return Optional.empty();
+		}
 	}
 
 	@Override
@@ -25,8 +38,13 @@ public class GuiBridgeDao implements BridgeInterface{
 
 	@Override
 	public Map<LocalDate, Worktime> getWorktimeList(Person person) {
-		// TODO Auto-generated method stub
-		return null;
+		try(AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(BuilderDao.class)){
+			
+			WorkdayDao workdayDao = context.getBean("jpaWorkdayService", WorkdayDao.class);
+			
+			return null;
+		}
 	}
 
 	@Override

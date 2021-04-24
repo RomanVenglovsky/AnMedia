@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ru.myhome.GUI.FormView;
 import ru.myhome.GUI.InterfaceBuilder;
+import ru.myhome.model.Person;
 
 public class Main extends Application{
 	
@@ -18,8 +19,17 @@ public class Main extends Application{
     @Autowired
 	private FormView view;
 	private static Scene scene;
+	private static Person person;
 	
 	
+	public static Person getCurrentUser() {
+		return person;
+	}
+
+	public static void setCurrentUser(Person person) {
+		Main.person = person;
+	}
+
 	public static void main(String[] args) {
 		launch();
 	}

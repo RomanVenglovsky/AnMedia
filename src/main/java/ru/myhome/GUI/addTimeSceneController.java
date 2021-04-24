@@ -1,10 +1,13 @@
 package ru.myhome.GUI;
 
+import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -21,9 +25,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import ru.myhome.Main;
 import ru.myhome.bridge.BridgeInterface;
+import ru.myhome.model.Workday;
 import ru.myhome.model.Worktime;
-import ru.myhome.test.WorktimeTest;
 
 public class addTimeSceneController implements Controller, InitializingBean{
 	
@@ -32,6 +38,14 @@ public class addTimeSceneController implements Controller, InitializingBean{
 	private BridgeInterface amDao;
 	private ObservableList<Worktime> items;
 	
+	public ObservableList<Worktime> getItems() {
+		return items;
+	}
+	public void setItems(ObservableList<Worktime> items) {
+		this.items = items;
+	}
+
+	@FXML private AnchorPane anchorPane;
 	@FXML private TableView<Worktime> tblDateTime;
 	@FXML private TableColumn<Worktime, Date> dateColumn;
 	@FXML private TableColumn<Worktime, Time> timeAColumn;
@@ -47,14 +61,15 @@ public class addTimeSceneController implements Controller, InitializingBean{
 		LocalDate d = dtpDate.getValue();
 		LocalTime a = LocalTime.parse(txfStartTime.getText());
 		LocalTime b = LocalTime.parse(txfEndTime.getText());
-		Worktime wt = new WorktimeTest(d,a,b);
+		/*Worktime wt = new WorktimeTest(d,a,b);
 		amDao.addWorktime(wt);
-		items.add(wt);
+		items.add(wt);*/
     }
 	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		
+	
+	
+	@FXML
+	public void initialize() {
 		dateColumn.setCellValueFactory(new PropertyValueFactory<Worktime,Date>("date"));
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.YYYY");
 		dateColumn.setCellFactory(tc -> new TableCell<Worktime, Date>() {
@@ -70,8 +85,11 @@ public class addTimeSceneController implements Controller, InitializingBean{
 		});
 		timeAColumn.setCellValueFactory(new PropertyValueFactory<Worktime, Time>("starttime"));
 		timeBColumn.setCellValueFactory(new PropertyValueFactory<Worktime, Time>("endtime"));
-		
-		items = FXCollections.observableArrayList(amDao.getWorktimeList().values());
+		//anchorPane.addEventHandler(, eventHandler);
+		anchorPane.addEventHandler(eventType., eventHandler);
+		for(Workday temp: Main.getCurrentUser().getWorkdays()) {
+			items.addAll(temp.getWorktimes());
+		}
 		tblDateTime.setItems(items);
 		LocalDate date = LocalDate.now();
 		dtpDate.setValue(date);
@@ -79,6 +97,11 @@ public class addTimeSceneController implements Controller, InitializingBean{
 
     @Override
 	public void setScene() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

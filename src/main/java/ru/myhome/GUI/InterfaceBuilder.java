@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import ru.myhome.bridge.BridgeInterface;
-import ru.myhome.test.TestBridge;
+import ru.myhome.bridge.GuiBridgeDao;
 
 @Configuration
 public class InterfaceBuilder {
@@ -21,7 +21,7 @@ public class InterfaceBuilder {
 	@Bean(name = "testDao")
 	@Lazy
 	public BridgeInterface getDao(){
-		BridgeInterface testDao = new TestBridge();
+		BridgeInterface testDao = new GuiBridgeDao();
         return testDao;
     }
 

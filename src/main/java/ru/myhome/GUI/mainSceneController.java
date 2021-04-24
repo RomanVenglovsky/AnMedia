@@ -2,18 +2,15 @@ package ru.myhome.GUI;
 
 import ru.myhome.Main;
 import ru.myhome.bridge.BridgeInterface;
-import ru.myhome.dao.BuilderDao;
-import ru.myhome.dao.interfaces.PersonDao;
-import ru.myhome.dao.interfaces.WorkdayDao;
-import ru.myhome.dao.interfaces.WorktimeDao;
+import ru.myhome.model.Person;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,11 +43,10 @@ public class mainSceneController implements Controller, InitializingBean, Initia
 		
 		String login = txfLogin.getText();
 		String password = psfPassword.getText();
-		//System.out.println("Login: " + login + "\nPassword: " + password);
-		//txfLogin.setText("Тут работает!");
-		//if(amDao.validateUser(login, password)) labelHello.setText("Hello " + login);
 		System.out.println("amDAO: " + amDao);
-		if(amDao.validateUser(login, password)) {
+		Optional<Person> currentUser = amDao.validateUser(login, password);
+		if(currentUser.isPresent()) {
+			Main.setCurrentUser(currentUser.get());
 			Stage stage = (Stage) btnLogin.getScene().getWindow();
 			stage.close();
 			Main.changeRoot("addTimeScene");

@@ -24,17 +24,17 @@ public class TestBridge implements BridgeInterface{
 	}
 	
 	@Override
-	public boolean validateUser(String login, String password) {
+	public Optional<Person> validateUser(String login, String password) {
 		/*System.out.println("Login: " + login + "\nPassword: " + password);
-		TestUser user = new TestUser(login, password);*/
+		TestUser user = new TestUser(login, password);
 		AnnotationConfigApplicationContext context = 
 				new AnnotationConfigApplicationContext(BuilderDao.class);
 		PersonDao personDao = context.getBean("jpaPesronService", PersonDao.class);
 		Optional<Person> p = personDao.findByPhoneNumber(login);
 		if(p.isPresent()) {
 			if(p.get().getPasword().equals(password)) return true;
-		}
-		return false;
+		}*/
+		return null;
 	}
 
 	public Map<LocalDate, Worktime> getWorktimeList() {
