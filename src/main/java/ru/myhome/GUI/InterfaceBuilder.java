@@ -27,9 +27,24 @@ public class InterfaceBuilder {
 
 	@Bean(name = "mainView")
 	@Scope("singleton")
-	public FormView getMainView() throws IOException {
+	@Lazy
+	public FormView getView() throws IOException {
 		//System.out.println(getClass().getResource("mainScene.fxml") + "!");
         return loadView(new String[]{"mainScene", "addTimeScene"});
+    }
+	@Bean(name = "getAddTimeView")
+	@Scope("singleton")
+	@Lazy
+	public FormView getAddTimeView() throws IOException {
+		//System.out.println(getClass().getResource("mainScene.fxml") + "!");
+        return loadView("addTimeScene");
+    }
+	@Bean(name = "getMainView")
+	@Scope("singleton")
+	@Lazy
+	public FormView getMainView() throws IOException {
+		//System.out.println(getClass().getResource("mainScene.fxml") + "!");
+        return loadView("mainScene");
     }
 	/**
      * Именно благодаря этому методу мы добавили контроллер в контекст спринга,
@@ -54,19 +69,22 @@ public class InterfaceBuilder {
     public addTimeSceneController getAddTimeController() throws IOException {
         return (addTimeSceneController) getMainView().getController("addTimeSceneController");
     }
-	
-	
+		
     /**
      * Самый обыкновенный способ использовать FXML загрузчик.
      * Как раз-таки на этом этапе будет создан объект-контроллер,
      * произведены все FXML инъекции и вызван метод инициализации контроллера.
      */
-    protected FormView loadView(String[] url) throws IOException {
+	protected FormView loadView(String url) throws IOException {
+		String[] name = new String[]{url};
+		return loadView(name);
+	}
+	protected FormView loadView(String[] url) throws IOException {
         try {
         	Map<String,Parent> parentList = new HashMap<String,Parent>();
         	Map<String,Object> controllerList = new HashMap<String,Object>();
             for(String item: url) {
-            	System.out.println(getClass().getResource(item + ".fxml"));
+            	System.out.println(getClass().getResource("Load view: " + item + ".fxml"));
             	FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource(item + ".fxml"));
                 loader.load();

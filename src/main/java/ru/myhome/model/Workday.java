@@ -17,6 +17,10 @@ import java.util.List;
 @Table(name="workdays")
 @NamedQuery(name="Workday.findAll", query="SELECT w FROM Workday w")
 public class Workday implements Serializable{
+	@Override
+	public String toString() {
+		return "Workday [id=" + id + "]";
+	}
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId

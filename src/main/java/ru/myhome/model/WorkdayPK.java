@@ -11,6 +11,10 @@ import javax.persistence.*;
  */
 @Embeddable
 public class WorkdayPK implements Serializable{
+	@Override
+	public String toString() {
+		return "date=" + date + ", personId=" + personId;
+	}
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 

@@ -15,10 +15,10 @@ import ru.myhome.model.Person;
 
 public class Main extends Application{
 	
-	@Qualifier("mainView")
-    @Autowired
-	private FormView view;
-	private static Scene scene;
+	//@Qualifier("mainView")
+    //@Autowired
+	//private FormView view;
+	//private static Scene scene;
 	private static Person person;
 	
 	
@@ -39,8 +39,9 @@ public class Main extends Application{
 
 		try(AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(InterfaceBuilder.class)){
-			context.getAutowireCapableBeanFactory().autowireBean(this);
-			scene = new Scene(view.getView("mainScene"));
+			//context.getAutowireCapableBeanFactory().autowireBean(this);
+			FormView fv = context.getBean("getMainView", FormView.class);
+			Scene scene = new Scene(fv.getView("mainScene"));
 			stage.setScene(scene);
 			stage.initStyle(StageStyle.UTILITY);
 			//stage.setResizable(false);
@@ -51,12 +52,19 @@ public class Main extends Application{
 	public static void changeRoot(String name) {
 		try(AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(InterfaceBuilder.class)){
-			
-			scene.setRoot(context.getBean(FormView.class).getView(name));
+			FormView fv = context.getBean("getAddTimeView", FormView.class);
+			Scene scene = new Scene(fv.getView("addTimeScene"));
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.initStyle(StageStyle.UTILITY);
+			//stage.setResizable(false);
+			stage.setAlwaysOnTop(true);
+			stage.show();
+			/*scene.setRoot(context.getBean(FormView.class).getView(name));
 			Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.setScene(scene);
-            stage.show();
+            stage.show();*/
             // Hide this current window (if this is what you want)
 		}
 	}

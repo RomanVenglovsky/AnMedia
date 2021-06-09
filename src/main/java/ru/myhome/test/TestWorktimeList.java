@@ -2,6 +2,7 @@ package ru.myhome.test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class TestWorktimeList {
 		LocalDate date = LocalDate.now();
 		for(int i = 1; i<5; i++) {
 			Worktime wt = new WorktimeTest(date.minusDays(6-i), a.plusHours(i), b.plusHours(i));
-			wtList.put(wt.getDate().toLocalDate(), wt);
+			//wtList.put(wt.getDate(), wt);
 			System.out.println(wt);
 			
 		}
@@ -33,6 +34,6 @@ public class TestWorktimeList {
 		return wtList;
 	}
 	public void addWorktime(Worktime wt) {
-		wtList.put(wt.getDate().toLocalDate(), (WorktimeTest) wt);
+		wtList.put(wt.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), (WorktimeTest) wt);
 	}
 }

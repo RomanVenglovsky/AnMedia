@@ -1,5 +1,6 @@
 package ru.myhome.GUI;
 
+import ru.myhome.CurentUser;
 import ru.myhome.Main;
 import ru.myhome.bridge.BridgeInterface;
 import ru.myhome.model.Person;
@@ -46,7 +47,7 @@ public class mainSceneController implements Controller, InitializingBean, Initia
 		System.out.println("amDAO: " + amDao);
 		Optional<Person> currentUser = amDao.validateUser(login, password);
 		if(currentUser.isPresent()) {
-			Main.setCurrentUser(currentUser.get());
+			CurentUser.set(currentUser.get());
 			Stage stage = (Stage) btnLogin.getScene().getWindow();
 			stage.close();
 			Main.changeRoot("addTimeScene");
@@ -74,7 +75,7 @@ public class mainSceneController implements Controller, InitializingBean, Initia
 		WorkdayDao workdayDao = context.getBean("jpaWorkdayService", WorkdayDao.class);
 		WorktimeDao worktimeDao = context.getBean("jpaWorktimeService", WorktimeDao.class);
 		System.out.println("Context created!!!");*/
-		txfLogin.setText("admin");
+		txfLogin.setText("+79771106575");
 		psfPassword.setText("root");
 	}
 	

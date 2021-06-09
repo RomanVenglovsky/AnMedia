@@ -1,6 +1,7 @@
 package ru.myhome.bridge;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class GuiBridgeDao implements BridgeInterface{
 	}
 
 	@Override
-	public Map<LocalDate, Worktime> getWorktimeList(Person person) {
+	public Map<LocalDate, List<Worktime>> getWorktimeList(Person person) {
 		try(AnnotationConfigApplicationContext context = 
 				new AnnotationConfigApplicationContext(BuilderDao.class)){
 			

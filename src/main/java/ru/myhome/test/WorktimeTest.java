@@ -1,9 +1,10 @@
 package ru.myhome.test;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import ru.myhome.model.Workday;
@@ -39,11 +40,12 @@ public class WorktimeTest extends Worktime{
 	}
 	@Override
 	public Date getDate() {
-		return Date.valueOf(date);
+		//return Date.valueOf(date);
+		return null;
 	}
 	@Override
 	public void setDate(Date date) {
-		this.date = date.toLocalDate();
+		this.date = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 	@Override
 	public Time getStarttime() {
@@ -57,7 +59,7 @@ public class WorktimeTest extends Worktime{
 	@Override
 	public String toString() {
 		DateTimeFormatter fDate = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-		String d = getDate().toLocalDate().format(fDate);
+		String d = getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().format(fDate);
 		return String.format("%s %tR - %tR", d, getStarttime(), getEndtime());
 	}
 	@Override

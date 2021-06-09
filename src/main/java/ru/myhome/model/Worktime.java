@@ -1,7 +1,7 @@
 package ru.myhome.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 
 import javax.persistence.*;
@@ -23,13 +23,20 @@ public class Worktime implements Serializable{
 	private Time starttime;
 	
 	//bi-directional many-to-one association to Workday
-	@ManyToOne(cascade = CascadeType.ALL)
+	//@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	@ManyToOne//(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumns({
 		@JoinColumn(name="day", referencedColumnName="date"),
 		@JoinColumn(name="persaonId", referencedColumnName="personId")
 		})
 	private Workday workday;
 	
+	/*	 
+	public Worktime(Time a, Time b, Date d) {
+		setStarttime(a);
+		setEndtime(b);
+		workday = new Workday();
+	}*/
 	public int getIntervalId() {
 		return this.intervalId;
 	}
@@ -37,6 +44,7 @@ public class Worktime implements Serializable{
 	public void setIntervalId(int intervalId) {
 		this.intervalId = intervalId;
 	}
+	
 	public Time getEndtime() {
 		return this.endtime;
 	}
@@ -60,8 +68,7 @@ public class Worktime implements Serializable{
 		System.out.println("\t" + getIntervalId() + "  " + getStarttime() + " - " + getEndtime());
 	}
 	public Date getDate() {
-		this.workday.getDate();
-		return null;
+		return this.workday.getDate();
 	}
 	public void setDate(Date date) {
 		// TODO Auto-generated method stub

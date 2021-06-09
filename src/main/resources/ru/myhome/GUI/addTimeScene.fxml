@@ -15,7 +15,7 @@
         <columns>
           <TableColumn fx:id="dateColumn" prefWidth="83.0" />
           <TableColumn fx:id="timeAColumn" prefWidth="82.0" />
-            <TableColumn fx:id="timeBColumn" prefWidth="81.0" />
+            <TableColumn fx:id="timeBColumn" prefWidth="81.0" sortType="DESCENDING" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -28,12 +28,12 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </DatePicker>
-            <TextField fx:id="txfStartTime">
+            <TextField fx:id="txfStartTime" text="10:00">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </TextField>
-            <TextField fx:id="txfEndTime">
+            <TextField fx:id="txfEndTime" text="19:00">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
